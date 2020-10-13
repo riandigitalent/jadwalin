@@ -1,0 +1,25 @@
+[{
+        "_id": "5f85781c5bbb55280852f7c8",
+        "course": "IT BackEnd",
+        "title": "Mysql",
+        "due_date": "2020-10-17",
+        "status": "done",
+        "__v": 0
+    },
+    {
+        "_id": "5f85aa9d6bcab92540ef0a16",
+        "course": "IT BackEnd",
+        "title": "MongoDB",
+        "due_date": "2020-10-16",
+        "status": "pending",
+        "__v": 0
+    },
+    {
+        "_id": "5f85aacd6bcab92540ef0a17",
+        "course": "IT BackEnd",
+        "title": "SQLite3",
+        "due_date": "2020-10-17",
+        "status": "pending",
+        "__v": 0
+    }
+]
