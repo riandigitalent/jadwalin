@@ -14,10 +14,10 @@ userRouter.post('/add', async(req, res) => {
         } = req.body;
 
         //
-        var saltRound = 10
+        let saltRound = 10
         const hashedPW = await bcrypt.hash(password, saltRound);
 
-        const newUser = new user({
+        const newUser = new User({
             "username": username,
             "password": hashedPW
         })
@@ -66,7 +66,8 @@ userRouter.post('/login', async(req, res) => {
     }
 })
 
-userRouter.get('/listuser', async(req, res) => {
+//getalluser
+userRouter.get('/user', async(req, res) => {
     const users = await User.find({})
     if (users) {
         res.json(users)
@@ -74,5 +75,52 @@ userRouter.get('/listuser', async(req, res) => {
         res.status(404).json({ message: 'Users not found' })
     }
 })
+
+//getuser by id
+userRouter.get('/info/:id', async(req, res) => {
+    const users = await User.findById(req.params.id)
+    if (users) {
+        res.json(users)
+    } else {
+        res.status(404).json({ message: 'Users not found' })
+    }
+})
+
+//put update
+
+userRouter.put('/update/:id', async(req, res) => {
+    const {
+        username,
+        password
+    } = req.body
+
+    let saltRound = 10
+    const hashedPW = await bcrypt.hash(password, saltRound);
+
+    const user = await User.findById(req.params.id)
+    if (user) {
+        user.username = username
+        user.password = hashedPW
+
+        const updateUser = await user.save()
+        res.json(updateUser)
+
+    } else {
+        res.status(404).json({ message: 'homework not found' })
+    }
+
+})
+
+userRouter.delete('/del/:id', async(req, res) => {
+    const users = await User.findById(req.params.id)
+    if (users) {
+        await User.remove()
+        res.json({ message: 'terdelete 1  remove' })
+    } else {
+        res.status(404).json({ message: 'Users not found' })
+    }
+})
+
+
 
 export default userRouter;
