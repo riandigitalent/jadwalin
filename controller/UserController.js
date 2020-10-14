@@ -66,4 +66,13 @@ userRouter.post('/login', async(req, res) => {
     }
 })
 
+userRouter.get('/listuser', async(req, res) => {
+    const users = await User.find({})
+    if (users) {
+        res.json(users)
+    } else {
+        res.status(404).json({ message: 'Users not found' })
+    }
+})
+
 export default userRouter;
