@@ -3,6 +3,7 @@ import express from 'express'
 import morgan from 'morgan'
 import mongoose from 'mongoose'
 import router from './router.js'
+import userRouter from './controller/UserController.js'
 
 dotenv.config();
 
@@ -26,6 +27,7 @@ app.get('/', (req, res, next) => {
 })
 
 app.use('/api', router) //local
+app.use('/api/user', userRouter)
 
 app.listen(process.env.PORT, () => {
     console.log(`app jalan di ${process.env.PORT}`)
