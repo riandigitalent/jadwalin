@@ -1,11 +1,11 @@
-import user from '../models/user.js'
-import express from 'express'
-import bcrypt from 'bcrypt'
+import User from './../models/user.js';
+import express from 'express';
+import bcrypt from 'bcrypt';
 
 
 const userRouter = express.Router();
 
-// tambah user
+//add new user
 userRouter.post('/add', async(req, res) => {
     try {
         const {
@@ -13,18 +13,19 @@ userRouter.post('/add', async(req, res) => {
             password
         } = req.body;
 
-        //
-        var saltRound = 10
-        const hashedPW = await bcrypt.hash(password, saltRound);
+        //digit angka mau berapa banyak
+        var saltRounds = 10;
+        const hashedPw = await bcrypt.hash(password, saltRounds);
 
-        const newUser = new user({
+        const newUser = new User({
             "username": username,
-            "password": hashedPW
-        })
+            "password": hashedPw
+        });
 
         const createdUser = await newUser.save();
 
-        res.status(201).json(createdUser)
+        res.status(201).json(createdUser);
+
     } catch (error) {
         res.status(500).json({ error: error })
     }
