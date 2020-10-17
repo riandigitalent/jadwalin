@@ -6,14 +6,17 @@
          required: true,
          unique: true
      },
-     email: {
-         type: String,
-         required: true,
-         unique: true
-     },
      password: {
          type: String,
          required: true,
+     },
+     Role: {
+         type: String,
+         default: 'basic',
+         enum: ["kasir", "manager", "bos"]
+     },
+     accessToken: {
+         type: String
      }
  }, {
      timestamps: true,
