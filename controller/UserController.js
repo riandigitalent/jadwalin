@@ -67,7 +67,7 @@ userRouter.post('/login', async(req, res) => {
 })
 
 //getalluser
-userRouter.get('/user', async(req, res) => {
+userRouter.get('/all', async(req, res) => {
     const users = await User.find({})
     if (users) {
         res.json(users)
