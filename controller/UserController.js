@@ -1,9 +1,10 @@
 import User from './../models/user.js';
 import express from 'express'
 import bcrypt from 'bcrypt'
-
+//import jwt from 'jsonwebtoken'
 
 const userRouter = express.Router();
+
 
 // tambah user
 userRouter.post('/add', async(req, res) => {
@@ -13,7 +14,8 @@ userRouter.post('/add', async(req, res) => {
             password
         } = req.body;
 
-        //
+        const users = await User.find({ username: username })
+            //
         let saltRound = 10
         const hashedPW = await bcrypt.hash(password, saltRound);
 
